@@ -18,9 +18,16 @@ AdBidder revolutionizes digital advertising on Web3, powered by Scroll's zkEVM t
 
 ## 📝 Getting Started
 ### Prerequisites
-- Node.js (14.x or later)
-- Yarn package manager
-- Git
+1. Copy .env.example file to the appropriate .env file
+```bash
+cp .env.example .env.<phase>
+```
+
+2. Fill the IPFS API key information
+```bash
+NEXT_PUBLIC_PINATA_API_KEY=...
+NEXT_PUBLIC_PINATA_SECRET_API_KEY=...
+```
 
 ### Installation & Setup
 1. Clone the repository
