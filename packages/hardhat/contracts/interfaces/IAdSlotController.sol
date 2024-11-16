@@ -20,6 +20,7 @@ interface IAdSlotController {
     /// @notice Required state variables:
     /// address payable public _owner;
     /// mapping(address => AdSlotInfo) public _adSlots;
+    /// AdSlotInfo[] private _adSlotAddresses;
     /// uint256 public immutable i_deploymentBlock;
 
     // ============ Events ============
@@ -52,6 +53,9 @@ interface IAdSlotController {
 
     /// @notice Returns the contract deployment block number
     function i_deploymentBlock() external view returns (uint256);
+
+    /// @notice Returns all ad slot addresses and their information
+    function getAllAdSlots() external view returns (AdSlotInfo[] memory);
 
     /// @notice Transfers ownership of the controller
     function transferOwnership(address payable newOwner) external;

@@ -13,6 +13,7 @@ contract AdSlotController is IAdSlotController {
 
     address payable public override _owner;
     mapping(address => AdSlotInfo) public override _adSlots;
+    AdSlotInfo[] private _adSlotAddresses;
     uint256 public immutable override i_deploymentBlock;
 
     // ============ Errors ============
@@ -93,13 +94,16 @@ contract AdSlotController is IAdSlotController {
         AdSlot newAdSlot = new AdSlot(payable(msg.sender), payable(address(this)));
         address adSlotAddress = address(newAdSlot);
 
-        _adSlots[adSlotAddress] = AdSlotInfo({
+        AdSlotInfo memory newAdSlotInfo = AdSlotInfo({
             adSlotAddress: adSlotAddress,
             adSlotName: adSlotName,
             domainName: domainName,
             adSlotWidth: adSlotWidth,
             adSlotHeight: adSlotHeight
         });
+
+        _adSlots[adSlotAddress] = newAdSlotInfo;
+        _adSlotAddresses.push(newAdSlotInfo);
 
         emit AdSlotCreated(
             adSlotAddress,
@@ -153,5 +157,10 @@ contract AdSlotController is IAdSlotController {
     /// @dev Returns information about specified ad slot
     function getAdSlotInfo(address adSlotAddress) external view override returns (AdSlotInfo memory) {
         return _adSlots[adSlotAddress];
+    }
+
+    /// @dev Returns all ad slots
+    function getAllAdSlots() external view override returns (AdSlotInfo[] memory) {
+        return _adSlotAddresses;
     }
 }
