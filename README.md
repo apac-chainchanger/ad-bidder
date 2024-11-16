@@ -7,7 +7,7 @@ AdBidder revolutionizes digital advertising on Web3, powered by Scroll's zkEVM t
 - 🌐 Easy Web3 accessibility for everyone
 
 ## 🚀 Deployment
-- **Network**: Scroll Sepolia
+- **Network**: Scroll Sepolia [0xa16d5668d5cac82c2e65534eb111343212c9f4dc](https://sepolia.scrollscan.com/address/0xa16d5668d5cac82c2e65534eb111343212c9f4dc)
 
 ## 🛠 Tech Stack
 - **Web3 User Experience**: Dynamic
