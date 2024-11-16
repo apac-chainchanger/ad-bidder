@@ -7,6 +7,7 @@ AdBidder revolutionizes digital advertising on Web3, powered by Scroll's zkEVM t
 - ⚡ High-performance, cost-effective operations
 - 🤖 AI-powered ad content verification
 - 🌐 Easy Web3 accessibility for everyone
+
 ## 🚀 Deployment
 - **Network**: Scroll Sepolia
 
@@ -54,10 +55,6 @@ AdBidder revolutionizes digital advertising on Web3, powered by Scroll's zkEVM t
 - Ad slot owner fee settlement system
 
 ## 🔗 Resources
-- [Scroll Sepolia](https://scroll.io/developers)
+- [Scroll Sepolia](https://docs.scroll.io/en/home/)
 - [Dynamic Documentation](https://www.dynamic.xyz/docs)
 - [Scaffold-ETH 2](https://scaffoldeth.io/)
-
-
-## 📜 License
-<TBD - on discussing>
