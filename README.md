@@ -1,7 +1,5 @@
 # 📢 AdBidder - Web3 Ad Space Marketplace
-
 AdBidder revolutionizes digital advertising on Web3, powered by Scroll's zkEVM technology and Dynamic's user-centric onboarding solutions. Our platform combines technical excellence with accessibility:
-
 - 🔄 Native compatibility with Ethereum through Scroll's zkEVM
 - 🎯 Frictionless social login and Web3 onboarding via Dynamic
 - ⚡ High-performance, cost-effective operations
@@ -18,8 +16,37 @@ AdBidder revolutionizes digital advertising on Web3, powered by Scroll's zkEVM t
 - **Framework**: Scaffold-ETH 2
 - **AI Integration**: Image content verification model
 
-## ✨ Key Features
+## 📝 Getting Started
+### Prerequisites
+- Node.js (14.x or later)
+- Yarn package manager
+- Git
 
+### Installation & Setup
+1. Clone the repository
+```bash
+git clone https://github.com/apac-chainchanger/ad-bidder.git
+cd ad-bidder
+```
+
+2. Navigate to the frontend directory
+```bash
+cd packages/nextjs
+```
+
+3. Install dependencies
+```bash
+yarn install
+```
+
+4. Start the server
+```bash
+yarn start
+```
+
+Your application should now be running at `http://localhost:3000` on `Scroll Sepolia`
+
+## ✨ Key Features
 ### 🎪 Ad Slot Management
 - Create and manage advertising slots
 - Configure slot dimensions and domain settings
@@ -43,7 +70,6 @@ AdBidder revolutionizes digital advertising on Web3, powered by Scroll's zkEVM t
 - Batch processing for fee management
 
 ## 🏗 Smart Contract Architecture
-
 ### 🎮 AdSlotController
 - Central controller for ad slot creation and management
 - Multi-slot management capabilities
