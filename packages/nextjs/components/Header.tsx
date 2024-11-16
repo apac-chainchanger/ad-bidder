@@ -5,7 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
-import { Bars3Icon, BugAntIcon, CircleStackIcon, WalletIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  BugAntIcon,
+  CurrencyDollarIcon,
+  PresentationChartLineIcon,
+  Square3Stack3DIcon,
+} from "@heroicons/react/24/outline";
 import { FaucetButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
 
@@ -26,14 +32,19 @@ export const menuLinks: HeaderMenuLink[] = [
     icon: <BugAntIcon className="h-4 w-4" />,
   },
   {
-    label: "Smart Wallet",
-    href: "/safe",
-    icon: <WalletIcon className="h-4 w-4" />,
+    label: "Bid Center",
+    href: "/bid-center",
+    icon: <CurrencyDollarIcon className="h-4 w-4" />,
   },
   {
-    label: "Data Storage",
-    href: "/fvm",
-    icon: <CircleStackIcon className="h-4 w-4" />,
+    label: "Slot Creator",
+    href: "/slot-creator",
+    icon: <Square3Stack3DIcon className="h-4 w-4" />,
+  },
+  {
+    label: "Dashboard",
+    href: "/dashboard",
+    icon: <PresentationChartLineIcon className="h-4 w-4" />,
   },
 ];
 
@@ -101,11 +112,11 @@ export const Header = () => {
         </div>
         <Link href="/" passHref className="hidden lg:flex items-center gap-2 ml-4 mr-6 shrink-0">
           <div className="flex relative w-10 h-10">
-            <Image alt="SE2 logo" className="cursor-pointer" fill src="/logo.svg" />
+            <Image alt="AdBidder logo" className="cursor-pointer" fill src="/logo.svg" />
           </div>
           <div className="flex flex-col">
-            <span className="font-bold leading-tight">Scaffold-ETH</span>
-            <span className="text-xs">Ethereum dev stack</span>
+            <span className="font-bold leading-tight">AdBidder</span>
+            <span className="text-xs">Web3 Ad Platform</span>
           </div>
         </Link>
         <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">
