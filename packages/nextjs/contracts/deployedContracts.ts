@@ -6,19 +6,48 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
 const deployedContracts = {
   31337: {
-    YourContract: {
-      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    AdSlotController: {
+      address: "0x5fbdb2315678afecb367f032d93f642f64180aa3",
       abi: [
         {
-          inputs: [
-            {
-              internalType: "address",
-              name: "_owner",
-              type: "address",
-            },
-          ],
+          inputs: [],
           stateMutability: "nonpayable",
           type: "constructor",
+        },
+        {
+          inputs: [],
+          name: "LowBid",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "NoBalance",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "OnlyOwner",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "OnlySlotOwner",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "SameOwner",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "TransferFailed",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "ZeroAddress",
+          type: "error",
         },
         {
           anonymous: false,
@@ -26,65 +55,170 @@ const deployedContracts = {
             {
               indexed: true,
               internalType: "address",
-              name: "greetingSetter",
+              name: "adSlotAddress",
               type: "address",
             },
             {
               indexed: false,
               internalType: "string",
-              name: "newGreeting",
+              name: "adSlotName",
               type: "string",
             },
             {
               indexed: false,
-              internalType: "bool",
-              name: "premium",
-              type: "bool",
+              internalType: "string",
+              name: "domainName",
+              type: "string",
             },
             {
               indexed: false,
               internalType: "uint256",
-              name: "value",
+              name: "adSlotWidth",
+              type: "uint256",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "adSlotHeight",
               type: "uint256",
             },
           ],
-          name: "GreetingChange",
+          name: "AdSlotCreated",
           type: "event",
         },
         {
-          inputs: [],
-          name: "greeting",
-          outputs: [
+          anonymous: false,
+          inputs: [
             {
-              internalType: "string",
-              name: "",
-              type: "string",
+              indexed: true,
+              internalType: "address",
+              name: "adSlotAddress",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "bidder",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
             },
           ],
-          stateMutability: "view",
-          type: "function",
+          name: "BidPlaced",
+          type: "event",
         },
         {
-          inputs: [],
-          name: "owner",
-          outputs: [
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "from",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "FeeReceived",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "previousOwner",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "newOwner",
+              type: "address",
+            },
+          ],
+          name: "OwnershipTransferred",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "owner",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "Withdrawal",
+          type: "event",
+        },
+        {
+          stateMutability: "payable",
+          type: "fallback",
+        },
+        {
+          inputs: [
             {
               internalType: "address",
               name: "",
               type: "address",
             },
           ],
+          name: "_adSlots",
+          outputs: [
+            {
+              internalType: "address",
+              name: "adSlotAddress",
+              type: "address",
+            },
+            {
+              internalType: "string",
+              name: "adSlotName",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "domainName",
+              type: "string",
+            },
+            {
+              internalType: "uint256",
+              name: "adSlotWidth",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "adSlotHeight",
+              type: "uint256",
+            },
+          ],
           stateMutability: "view",
           type: "function",
         },
         {
           inputs: [],
-          name: "premium",
+          name: "_owner",
           outputs: [
             {
-              internalType: "bool",
+              internalType: "address payable",
               name: "",
-              type: "bool",
+              type: "address",
             },
           ],
           stateMutability: "view",
@@ -93,46 +227,184 @@ const deployedContracts = {
         {
           inputs: [
             {
+              internalType: "address[]",
+              name: "adSlotAddresses",
+              type: "address[]",
+            },
+          ],
+          name: "batchWithdrawAdSlotFees",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
               internalType: "string",
-              name: "_newGreeting",
+              name: "adSlotName",
+              type: "string",
+            },
+            {
+              internalType: "string",
+              name: "domainName",
+              type: "string",
+            },
+            {
+              internalType: "uint256",
+              name: "adSlotWidth",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "adSlotHeight",
+              type: "uint256",
+            },
+          ],
+          name: "createAdSlot",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "adSlotAddress",
+              type: "address",
+            },
+          ],
+          name: "getAdSlotInfo",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "address",
+                  name: "adSlotAddress",
+                  type: "address",
+                },
+                {
+                  internalType: "string",
+                  name: "adSlotName",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "domainName",
+                  type: "string",
+                },
+                {
+                  internalType: "uint256",
+                  name: "adSlotWidth",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "adSlotHeight",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct IAdSlotController.AdSlotInfo",
+              name: "",
+              type: "tuple",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "adSlotAddress",
+              type: "address",
+            },
+          ],
+          name: "getCurrentBidInfo",
+          outputs: [
+            {
+              internalType: "address",
+              name: "bidder",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+            {
+              internalType: "string",
+              name: "adImageCID",
+              type: "string",
+            },
+            {
+              internalType: "uint256",
+              name: "timestamp",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "i_deploymentBlock",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "adSlotAddress",
+              type: "address",
+            },
+            {
+              internalType: "string",
+              name: "adImageCID",
               type: "string",
             },
           ],
-          name: "setGreeting",
+          name: "placeBid",
           outputs: [],
           stateMutability: "payable",
           type: "function",
         },
         {
-          inputs: [],
-          name: "totalCounter",
-          outputs: [
+          inputs: [
             {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
+              internalType: "address",
+              name: "adSlotAddress",
+              type: "address",
+            },
+            {
+              internalType: "address payable",
+              name: "newOwner",
+              type: "address",
             },
           ],
-          stateMutability: "view",
+          name: "transferAdSlotOwnership",
+          outputs: [],
+          stateMutability: "nonpayable",
           type: "function",
         },
         {
           inputs: [
             {
-              internalType: "address",
-              name: "",
+              internalType: "address payable",
+              name: "newOwner",
               type: "address",
             },
           ],
-          name: "userGreetingCounter",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
+          name: "transferOwnership",
+          outputs: [],
+          stateMutability: "nonpayable",
           type: "function",
         },
         {
@@ -143,11 +415,37 @@ const deployedContracts = {
           type: "function",
         },
         {
+          inputs: [
+            {
+              internalType: "address",
+              name: "adSlotAddress",
+              type: "address",
+            },
+          ],
+          name: "withdrawAdSlotFees",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
           stateMutability: "payable",
           type: "receive",
         },
       ],
-      inheritedFunctions: {},
+      inheritedFunctions: {
+        _adSlots: "contracts/interfaces/IAdSlotController.sol",
+        _owner: "contracts/interfaces/IAdSlotController.sol",
+        batchWithdrawAdSlotFees: "contracts/interfaces/IAdSlotController.sol",
+        createAdSlot: "contracts/interfaces/IAdSlotController.sol",
+        getAdSlotInfo: "contracts/interfaces/IAdSlotController.sol",
+        getCurrentBidInfo: "contracts/interfaces/IAdSlotController.sol",
+        i_deploymentBlock: "contracts/interfaces/IAdSlotController.sol",
+        placeBid: "contracts/interfaces/IAdSlotController.sol",
+        transferAdSlotOwnership: "contracts/interfaces/IAdSlotController.sol",
+        transferOwnership: "contracts/interfaces/IAdSlotController.sol",
+        withdraw: "contracts/interfaces/IAdSlotController.sol",
+        withdrawAdSlotFees: "contracts/interfaces/IAdSlotController.sol",
+      },
     },
   },
 } as const;

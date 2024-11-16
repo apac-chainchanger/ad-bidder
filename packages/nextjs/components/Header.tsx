@@ -4,7 +4,7 @@ import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
+import { DynamicWidget, useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import {
   Bars3Icon,
   BugAntIcon,
@@ -26,6 +26,9 @@ export const menuLinks: HeaderMenuLink[] = [
     label: "Home",
     href: "/",
   },
+];
+
+export const authenticatedMenuLinks: HeaderMenuLink[] = [
   {
     label: "Debug Contracts",
     href: "/debug",
@@ -50,10 +53,14 @@ export const menuLinks: HeaderMenuLink[] = [
 
 export const HeaderMenuLinks = () => {
   const pathname = usePathname();
+  const { primaryWallet } = useDynamicContext();
+  const isConnected = !!primaryWallet?.address;
+
+  const links = [...menuLinks, ...(isConnected ? authenticatedMenuLinks : [])];
 
   return (
     <>
-      {menuLinks.map(({ label, href, icon }) => {
+      {links.map(({ label, href, icon }) => {
         const isActive = pathname === href;
         return (
           <li key={href}>
