@@ -92,7 +92,7 @@ export const MyBids = ({ address }: MyBidsProps) => {
     };
 
     loadBids();
-  }, [bidEvents, address, adSlotController]);
+  }, [bidEvents, address, adSlotController, initialized]);
 
   return (
     <div className="space-y-6">
